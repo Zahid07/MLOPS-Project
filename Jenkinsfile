@@ -29,7 +29,9 @@ pipeline {
                         
                         // run command dvc pull
                         bat 'dvc pull'
-                        bat 'dir'
+                        dir ('data') {
+                            bat 'dir'
+                        }
                     }
                 }
 
