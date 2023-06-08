@@ -28,12 +28,12 @@ def eval_metrics(actual, pred):
 def trainfunction( alpha = 0.5, l1_ratio = 0.5):
 
     # data is in the folder MLFlow-Project/dvc/data
-    data_folder = "dags/MLOPS-Project/dvc/data"
+    data_folder = "dags
     # print all folders in the data folder
-    # print(os.listdir(data_folder))
+    print(os.listdir(data_folder))
 
     # list all folders in the current directory
-    print(os.listdir())
+    # print(os.listdir())
 
     # warnings.filterwarnings("ignore")
     # np.random.seed(40)
