@@ -37,6 +37,14 @@ pipeline {
 
             }
         }
+
+        // add a stage to run the airflow
+        stage('Running Airflow') {
+            steps {
+                // print all the files in the repo and use bat
+                bat 'dir'
+            }
+        }
         
 
         
