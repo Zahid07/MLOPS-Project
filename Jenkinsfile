@@ -42,7 +42,7 @@ pipeline {
         stage('Running Airflow') {
             steps {
                 // print all the files in the repo and use bat
-                bat 'dir'
+                bat 'docker-compose up -d'
             }
         }
         
