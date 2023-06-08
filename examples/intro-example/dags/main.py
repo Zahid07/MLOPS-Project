@@ -29,7 +29,10 @@ from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from airflow.operators.python_operator import PythonOperator
 from printHello import printingHello
-from data.getDataFromDVC import download_data
+from downloadData import cloneRepo
+from train import trainfunction
+# get the git operator
+# from airflow.contrib.operators.git_operator import GitOperator
 # get python operator
 
 
@@ -59,6 +62,8 @@ default_args = {
     # 'trigger_rule': u'all_success'
 }
 
+
+
 dag = DAG(
     'TrainModel',
     default_args=default_args,
@@ -66,4 +71,26 @@ dag = DAG(
     schedule_interval=timedelta(days=1),
 )
 
-# getData
+
+# # create a task named get_data using python operator which will call the cloneRepo function
+# get_data = PythonOperator(
+#     task_id='get_data',
+#     python_callable=cloneRepo,
+#     dag=dag,
+# )
+
+train_model = PythonOperator(
+    task_id='train_model',
+    python_callable=trainfunction,
+    dag=dag,
+)
+
+
+# # create a task named print_hello using bash operator which will call the printingHello function
+# print_hello = BashOperator(
+#     task_id='print_hello',
+#     bash_command='echo "hello world"',
+#     dag=dag,
+# )
+
+train_model
