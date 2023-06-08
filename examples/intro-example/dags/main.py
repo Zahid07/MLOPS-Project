@@ -31,6 +31,7 @@ from airflow.operators.python_operator import PythonOperator
 from printHello import printingHello
 from downloadData import cloneRepo
 from train import trainfunction
+from publishMlRuns import pushToGit
 # get the git operator
 # from airflow.contrib.operators.git_operator import GitOperator
 # get python operator
@@ -85,6 +86,12 @@ train_model = PythonOperator(
     dag=dag,
 )
 
+push_to_git = PythonOperator(
+    task_id='push_to_git',
+    python_callable=pushToGit,
+    dag=dag,
+)
+
 
 # # create a task named print_hello using bash operator which will call the printingHello function
 # print_hello = BashOperator(
@@ -93,4 +100,4 @@ train_model = PythonOperator(
 #     dag=dag,
 # )
 
-train_model
+train_model >> push_to_git
