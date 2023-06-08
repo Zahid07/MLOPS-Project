@@ -35,61 +35,61 @@ def trainfunction( alpha = 0.5, l1_ratio = 0.5):
     # list all folders in the current directory
     # print(os.listdir())
 
-    # warnings.filterwarnings("ignore")
-    # np.random.seed(40)
+    warnings.filterwarnings("ignore")
+    np.random.seed(40)
 
-    # # Read the wine-quality csv file from the URL
-    # csv_url = (
-    #     "https://raw.githubusercontent.com/mlflow/mlflow/master/tests/datasets/winequality-red.csv"
-    # )
-    # try:
-    #     data = pd.read_csv(csv_url, sep=";")
-    # except Exception as e:
-    #     logger.exception(
-    #         "Unable to download training & test CSV, check your internet connection. Error: %s", e
-    #     )
+    # Read the wine-quality csv file from the URL
+    csv_url = (
+        "https://raw.githubusercontent.com/mlflow/mlflow/master/tests/datasets/winequality-red.csv"
+    )
+    try:
+        data = pd.read_csv(csv_url, sep=";")
+    except Exception as e:
+        logger.exception(
+            "Unable to download training & test CSV, check your internet connection. Error: %s", e
+        )
 
-    # # Split the data into training and test sets. (0.75, 0.25) split.
-    # train, test = train_test_split(data)
+    # Split the data into training and test sets. (0.75, 0.25) split.
+    train, test = train_test_split(data)
 
-    # # The predicted column is "quality" which is a scalar from [3, 9]
-    # train_x = train.drop(["quality"], axis=1)
-    # test_x = test.drop(["quality"], axis=1)
-    # train_y = train[["quality"]]
-    # test_y = test[["quality"]]
+    # The predicted column is "quality" which is a scalar from [3, 9]
+    train_x = train.drop(["quality"], axis=1)
+    test_x = test.drop(["quality"], axis=1)
+    train_y = train[["quality"]]
+    test_y = test[["quality"]]
 
-    # with mlflow.start_run():
-    #     lr = ElasticNet(alpha=alpha, l1_ratio=l1_ratio, random_state=42)
-    #     lr.fit(train_x, train_y)
+    with mlflow.start_run():
+        lr = ElasticNet(alpha=alpha, l1_ratio=l1_ratio, random_state=42)
+        lr.fit(train_x, train_y)
 
-    #     predicted_qualities = lr.predict(test_x)
+        predicted_qualities = lr.predict(test_x)
 
-    #     (rmse, mae, r2) = eval_metrics(test_y, predicted_qualities)
+        (rmse, mae, r2) = eval_metrics(test_y, predicted_qualities)
 
-    #     print("Elasticnet model (alpha={:f}, l1_ratio={:f}):".format(alpha, l1_ratio))
-    #     print("  RMSE: %s" % rmse)
-    #     print("  MAE: %s" % mae)
-    #     print("  R2: %s" % r2)
+        print("Elasticnet model (alpha={:f}, l1_ratio={:f}):".format(alpha, l1_ratio))
+        print("  RMSE: %s" % rmse)
+        print("  MAE: %s" % mae)
+        print("  R2: %s" % r2)
 
-    #     mlflow.log_param("alpha", alpha)
-    #     mlflow.log_param("l1_ratio", l1_ratio)
-    #     mlflow.log_metric("rmse", rmse)
-    #     mlflow.log_metric("r2", r2)
-    #     mlflow.log_metric("mae", mae)
+        mlflow.log_param("alpha", alpha)
+        mlflow.log_param("l1_ratio", l1_ratio)
+        mlflow.log_metric("rmse", rmse)
+        mlflow.log_metric("r2", r2)
+        mlflow.log_metric("mae", mae)
 
-    #     predictions = lr.predict(train_x)
-    #     signature = infer_signature(train_x, predictions)
+        predictions = lr.predict(train_x)
+        signature = infer_signature(train_x, predictions)
 
-    #     tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
+        tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
 
-    #     # Model registry does not work with file store
-    #     if tracking_url_type_store != "file":
-    #         # Register the model
-    #         # There are other ways to use the Model Registry, which depends on the use case,
-    #         # please refer to the doc for more information:
-    #         # https://mlflow.org/docs/latest/model-registry.html#api-workflow
-    #         mlflow.sklearn.log_model(
-    #             lr, "model", registered_model_name="ElasticnetWineModel", signature=signature
-    #         )
-    #     else:
-    #         mlflow.sklearn.log_model(lr, "model", signature=signature)
+        # Model registry does not work with file store
+        if tracking_url_type_store != "file":
+            # Register the model
+            # There are other ways to use the Model Registry, which depends on the use case,
+            # please refer to the doc for more information:
+            # https://mlflow.org/docs/latest/model-registry.html#api-workflow
+            mlflow.sklearn.log_model(
+                lr, "model", registered_model_name="ElasticnetWineModel", signature=signature
+            )
+        else:
+            mlflow.sklearn.log_model(lr, "model", signature=signature)
