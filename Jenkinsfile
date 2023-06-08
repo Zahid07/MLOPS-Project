@@ -8,8 +8,8 @@ pipeline {
     stages {
         stage('Cloning the repo') {
             steps {
-                // just print a message
-                echo 'Cloning the repo'
+                git branch: 'DVC', url: 'https://github.com/Zahid07/MLOPS-Project.git'
+                
 
             }
         }
