@@ -22,7 +22,12 @@ pipeline {
                     // clone the dvc repo
                     git branch: 'DVC', url: 'https://github.com/Zahid07/MLOPS-Project.git'
                     // print all the files in the repo and use bat
-                    bat 'dir'
+                    
+
+                    // go in dvc folder and print all the files
+                    dir('dvc') {
+                        bat 'dir'
+                    }
                 }
 
             }
