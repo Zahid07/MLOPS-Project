@@ -26,6 +26,9 @@ pipeline {
 
                     // go in dvc folder and print all the files
                     dir('dvc') {
+                        
+                        // run command dvc pull
+                        bat 'dvc pull'
                         bat 'dir'
                     }
                 }
