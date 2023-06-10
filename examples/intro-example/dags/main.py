@@ -30,7 +30,7 @@ from airflow.operators.bash_operator import BashOperator
 from airflow.operators.python_operator import PythonOperator
 from printHello import printingHello
 from downloadData import cloneRepo
-from train import trainfunction
+from models.train import trainfunction
 from publishMlRuns import pushToGit
 # get the git operator
 # from airflow.contrib.operators.git_operator import GitOperator
