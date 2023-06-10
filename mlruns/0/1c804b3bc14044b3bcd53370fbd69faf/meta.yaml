@@ -1,0 +1,15 @@
+artifact_uri: file:///D:/MLOPS-Project-Mlruns/MLOPS-Project/mlruns/0/1c804b3bc14044b3bcd53370fbd69faf/artifacts
+end_time: 1686416580642
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 1c804b3bc14044b3bcd53370fbd69faf
+run_name: delightful-robin-183
+run_uuid: 1c804b3bc14044b3bcd53370fbd69faf
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1686416572900
+status: 3
+tags: []
+user_id: LENOVO
