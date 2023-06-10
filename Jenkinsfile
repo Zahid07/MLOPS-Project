@@ -43,7 +43,7 @@ pipeline {
         // cloning mlFlow branch in examples/intro-example/dags
         stage('Cloning mlFlow repo') {
             steps {
-                dir('examples/intro-example/dags') {
+                dir('examples/intro-example/dags/models') {
                     // clone the dvc repo
                     git branch: 'mlFlow', url: 'https://github.com/Zahid07/MLOPS-Project.git'
                     // print all the files in the repo and use bat
